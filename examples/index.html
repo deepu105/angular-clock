@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>Angular-Clock</title>
+  <link rel="stylesheet" href="../dist/angular-clock.css">
+  <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="../bower_components/rainbow/themes/github.css">
+  <link href="bootstrap.css" rel="stylesheet">
+  <link href="app.css" rel="stylesheet">
+</head>
+
+<body ng-app="examples" id="top">
+  <div class="navbar navbar-default navbar-fixed-top">
+    <div class="container" ng-controller="MenuCtrl">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" ng-click="isCollapsed = !isCollapsed">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand visible-xs" href="#">Angular Clock</a>
+      </div>
+      <nav class="hidden-xs">
+        <ul class="nav navbar-nav">
+          <li>
+            <a href="#top" role="button" class="navbar-brand">
+              Angular Clock
+            </a>
+          </li>
+          <!--<li class="dropdown">
+            <a role="button" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+              Directives <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a ng-href="#widget-clock">ds-widget-clock</a>
+              </li>
+            </ul>
+          </li>-->
+          <li><a href="#getting_started">Getting started</a>
+          </li>
+          <li><a href="#directive">Directive</a>
+          </li>
+          <li><a href="#style">Styling</a>
+          </li>
+        </ul>
+      </nav>
+      <nav class="collapse" collapse="isCollapsed" style="height: 0px;">
+        <ul class="nav navbar-nav">
+          <li><a href="#getting_started" ng-click="isCollapsed = !isCollapsed">Getting started</a>
+          </li>
+          <li><a href="#directive" ng-click="isCollapsed = !isCollapsed">Directives</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="text-center aspect-ratio" id="container" ng-controller="HeadCtrl">
+      <div style="width:200px;margin:0 auto;">
+        <ds-widget-clock theme="dark" show-secs="true" show-am-pm></ds-widget-clock>
+      </div>
+      <div class="header">
+        <h1>
+          Angular Clock Widget
+        </h1>
+
+        <p>Responsive, beautiful clocks for <a href="http://angularjs.org">AngularJS</a> built using <a href="https://developer.mozilla.org/en/docs/Web/SVG">SVG</a>
+        </p>
+
+        <p>
+          <a class="btn btn-default btn-lg" href="https://github.com/deepu105/angular-clock"><i class="icon-github"></i>Code on Github</a>
+          <a class="btn btn-success btn-lg" href="../dist/angular-clock.js.tar.gz" download="angular-clock.js.tar.gz">
+            <i class="fa fa-download"></i> Download <small>(0.1.0)</small>
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <section id="getting_started">
+      <div class="page-header">
+        <h1>Getting started</h1>
+      </div>
+      <h3>Dependencies</h3>
+      <p>
+        This repository contains <strong>native AngularJS directives</strong> to render a clock face. The <strong>only required dependencies</strong> are:
+      </p>
+      <ul>
+        <li><a href="http://angularjs.org" target="_blank">AngularJS</a> (tested with 1.3.14 although it probably works with older versions)</li>
+      </ul>
+      <h3>Files to download</h3>
+      <p>The easiest is to download with <strong>bower</strong>:</p>
+      <pre>bower install angular-clock --save </pre>
+      <p>Alternatively files can be downloaded <a href="https://github.com/deepu105/angular-clock">downloaded from Github</a>.
+      </p>
+      <p>Whichever method you choose the good news is that the overall size is very small: &lt;4kb for all directives (~1kb with gzip compression!)</p>
+      <h3>Installation</h3>
+      <pre><code>&lt;script src=&quot;bower_components/dist/angular-clock.js&quot;&gt;&lt;/script&gt;</code></pre>
+      <p>As soon as you've got all the files downloaded and included in your page you just need to declare a dependency on the <code>ds.clock</code>  <a href="http://docs.angularjs.org/guide/module">module</a>:
+        <br>
+      </p><pre><code>angular.module('myModule', ['ds.clock']);</code></pre>
+      <p></p>
+      <h3>CSS</h3>
+      <p>You need to include a link to the css file in your page.</p>
+      <pre><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;bower_components/dist/angular-clock.css&quot;&gt;</code></pre>
+      <h3>Options</h3>
+      <p>There are several options that you can set as attributes on the directive element</p>
+      <ol class="chart-legend">
+        <li><code>show-secs</code> : shows second in digital clock, (default: <code>true</code>)</li>
+        <li><code>show-am-pm</code> : shows am/pm in digital clock, (default: <code>false</code>)</li>
+        <li><code>gmt-offset</code> : shows time for the given <a href="http://en.wikipedia.org/wiki/List_of_UTC_time_offsets">GMT offset</a> in clock, (default: <code>false</code>, shows local time) example: India -> 5.30, Singapore -> 8 , venezula -> -4.30, Nepal -> 5.45</li>
+        <li><code>show-digital</code>: shows digital clock, (default: <code>true</code> if both show-analog &amp;show-digital are not set)</li>
+        <li><code>show-analog</code> : shows analog clock, (default: <code>true</code> if both show-analog &amp;show-digital are not set)</li>
+        <li><code>show-gmt-info</code> : shows GMT offset value, (default: <code>false</code>)</li>
+        <li><code>theme</code> : analog clockface theme, (default: <code>light</code>)</li>
+      </ol>
+    </section>
+    <section id="directives">
+      <div class="page-header">
+        <h1>Directives</h1>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12" id="line-chart" ng-controller="BaseCtrl">
+          <div class="panel panel-default">
+            <div class="panel-heading">Default Clock</div>
+            <div class="panel-body text-center">
+              <div class="">
+                <ds-widget-clock></ds-widget-clock>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-8 col-md-6 col-sm-12 code">
+          <tabset>
+            <tab heading="Markup">
+              <pre><code data-language="xml">&lt;ds-widget-clock&gt;&lt;/ds-widget-clock&gt;</code></pre>
+            </tab>
+            <tab heading="Javascript">
+              <pre><code data-language="javascript">angular.module("app", ["ds.clock"]).controller("AppCtrl", function ($scope) {
+
+});
+              </code></pre>
+            </tab>
+          </tabset>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12" id="line-chart" ng-controller="BaseCtrl">
+          <div class="panel panel-default">
+            <div class="panel-heading">Clock with Timezone Offset</div>
+            <div class="panel-body text-center">
+              <div>
+                <label>GMT Offset <small>In HH.MM format</small>
+                </label>
+                <select class="form-control" ng-model="gmtValue" placeholder="Select GMT offset value here">
+                  <option value="-12.00">−12.00</option>
+                  <option value="-11.00">−11.00</option>
+                  <option value="-10.00">−10.00</option>
+                  <option value="-9.30">−09.30</option>
+                  <option value="-9">−09.00</option>
+                  <option value="-8">−08.00</option>
+                  <option value="-7">−07.00</option>
+                  <option value="-6">−06.00</option>
+                  <option value="-5">−05.00</option>
+                  <option value="-4.3">−04.30</option>
+                  <option value="-4">−04.00</option>
+                  <option value="-3.3">−03.30</option>
+                  <option value="-3">−03.00</option>
+                  <option value="-2">−02.00</option>
+                  <option value='-1'>−01.00</option>
+                  <option value="0">GMT (00.00)</option>
+                  <option value="1">+01.00</option>
+                  <option value="2">+02.00</option>
+                  <option value="3">+03.00</option>
+                  <option value="3.30">+03.30</option>
+                  <option value="4">+04.00</option>
+                  <option value="4.30">+04.30</option>
+                  <option value="5">+05.00</option>
+                  <option value="5.30">+05.30</option>
+                  <option value="5.45">+05.45</option>
+                  <option value="6.00">+06.00</option>
+                  <option value="6.30">+06.30</option>
+                  <option value="7">+07.00</option>
+                  <option value="8">+08.00</option>
+                  <option value="8.45">+08.45</option>
+                  <option value="9">+09.00</option>
+                  <option value="9.30">+09.30</option>
+                  <option value="10">+10.00</option>
+                  <option value="10.30">+10.30</option>
+                  <option value="11">+11.00</option>
+                  <option value="11.30">+11.30</option>
+                  <option value="12">+12.00</option>
+                  <option value="12.45">+12.45</option>
+                  <option value="13">+13.00</option>
+                  <option value="14">+14.00</option>
+                </select>
+              </div>
+              <div class="">
+                <ds-widget-clock gmt-offset="gmtValue" show-gmt-info></ds-widget-clock>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-8 col-md-6 col-sm-12 code">
+          <tabset>
+            <tab heading="Markup">
+              <pre><code data-language="xml">&lt;ds-widget-clock&gt;&lt;/ds-widget-clock&gt;</code></pre>
+            </tab>
+            <tab heading="Javascript">
+              <pre><code data-language="javascript">angular.module("app", ["ds.clock"]).controller("AppCtrl", function ($scope) {
+
+});
+              </code></pre>
+            </tab>
+          </tabset>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12" id="line-chart" ng-controller="BaseCtrl">
+          <div class="panel panel-default">
+            <div class="panel-heading">Default Clock</div>
+            <div class="panel-body text-center">
+              <div class="">
+                <ds-widget-clock data-theme="dark" data-gmt-offset="8.5" data-show-gmt-info data-show-secs data-show-am-pm></ds-widget-clock>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-8 col-md-6 col-sm-12 code">
+          <tabset>
+            <tab heading="Settings" class="settings">
+              <div class="settings">
+                <code>.chart-line</code>
+                <ul>
+                  <li><code>data</code>: series data</li>
+                  <li><code>labels</code>: x axis labels</li>
+                  <li><code>legend</code> (default: <code>false</code>): show legend below the chart</li>
+                  <li><code>options</code> (default: <code>{}</code>): Chart.js options</li>
+                  <li><code>series</code> (default: <code>[]</code>): series labels</li>
+                  <li><code>click</code> (optional): onclick event handler</li>
+                  <li><code>colours</code> (default to global colours): colours for the chart</li>
+                </ul>
+              </div>
+            </tab>
+            <tab heading="Markup">
+              <pre><code data-language="html">&lt;canvas id=&quot;line&quot; class=&quot;chart chart-line&quot; data=&quot;data&quot;
+  labels=&quot;labels&quot; legend=&quot;true&quot; series=&quot;series&quot;
+  click=&quot;onClick&quot;&gt;
+&lt;/canvas&gt; </code></pre>
+            </tab>
+            <tab heading="Javascript">
+              <pre><code data-language="javascript">angular.module("app", ["chart.js"]).controller("LineCtrl", function ($scope) {
+
+  $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
+  $scope.series = ['Series A', 'Series B'];
+  $scope.data = [
+    [65, 59, 80, 81, 56, 55, 40],
+    [28, 48, 40, 19, 86, 27, 90]
+  ];
+  $scope.onClick = function (points, evt) {
+    console.log(points, evt);
+  };
+});
+              </code></pre>
+            </tab>
+          </tabset>
+        </div>
+      </div>
+    </section>
+    <section id="style">
+      <div class="page-header">
+        <h1>Reactive</h1>
+        <p>All charts are reactive and will update automatically when data changes.</p>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="panel panel-default">
+            <div class="panel-heading">Chart Data</div>
+            <div class="panel-body">
+              <table class="table table-responsive table-condensed table-striped">
+                <tr>
+                  <th ng-repeat="label in labels">{{label}}</th>
+                </tr>
+                <tr ng-repeat="dataSet in data">
+                  <td ng-repeat="set in dataSet track by $index"><span style="text-align: right;">{{data[$parent.$index][$index]}}</span>
+                  </td>
+                </tr>
+              </table>
+              <button type="button" class="btn btn-primary pull-right" ng-click="randomize()">Randomize</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-8 col-md-6 col-sm-12">
+          <div class="panel panel-default">
+            <div class="panel-heading">Reactive Chart</div>
+            <div class="panel-body">
+              <canvas id="tables" class="chart chart-line" data="data" labels="labels" colours="colours"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <footer class="footer">
+    <div class="container">
+      <p>Designed and built by <a href="https://github.com/jtblin" target="_blank">Deepu K Sasidharan</a>
+      </p>
+      <p>Code licensed under <a href="http://opensource.org/licenses/MIT">MIT License</a>.</p>
+      <p><a href="https://github.com/deepu105/angular-clock/issues?state=open">Issues</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="../bower_components/angular/angular.min.js"></script>
+  <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+  <script src="../bower_components/rainbow/js/rainbow.min.js"></script>
+  <script src="../bower_components/rainbow/js/language/generic.js"></script>
+  <script src="../bower_components/rainbow/js/language/html.js"></script>
+  <script src="../bower_components/rainbow/js/language/javascript.js"></script>
+  <script src="../dist/angular-clock.min.js"></script>
+  <script src="smoothscroll.min.js"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>
+

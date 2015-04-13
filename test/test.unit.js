@@ -1,0 +1,97 @@
+/*jshint mocha:true*/
+/*global module:true*/
+/*global inject:true*/
+/*global expect:true*/
+/*global sinon:true*/
+describe('Angular Clock Unit testing', function() {
+  'use strict';
+
+  var $compile, scope, sandbox;
+
+  beforeEach(module('ds.clock'));
+
+  beforeEach(inject(function(_$compile_, _$rootScope_) {
+    // The injector unwraps the underscores (_) from around the parameter names when matching
+    $compile = _$compile_;
+    scope = _$rootScope_;
+    sandbox = sinon.sandbox.create();
+  }));
+
+  afterEach(function() {
+    sandbox.restore();
+  });
+
+  describe('base', function() {
+    it('replaces the directive element with the appropriate content', function() {
+      var markup = '<div>' +
+        '<ds-widget-clock></ds-widget-clock></div>';
+
+
+
+      var element = $compile(markup)(scope);
+      scope.$digest();
+
+      expect(element.html()).to.have.string('class="widget-clock');
+    });
+
+    describe('clock types', function() {
+      [0, 8, 5.30, -5.30, -5.15, 5.45, -1].forEach(function(type) {
+        it('creates a GMT ' + type + ' timezone clock using the directive', function() {
+          var markup = '<div><ds-widget-clock data-gmt-offset="' +
+            type + '" data-show-gmt-info></ds-widget-clock></div>';
+
+
+          //var mock = sandbox.mock(Chart.prototype);   
+          //mock.expects(type);
+
+          var element = $compile(markup)(scope);
+          scope.$digest();
+
+          //mock.verify(); GMT +5.0
+          expect(element.html()).to.have.string('>' + getGMTText(type) + '<');
+        });
+
+      });
+    });
+    describe('clock theme', function() {
+      it('replaces the element with the appropriate content for dark theme', function() {
+        var markup = '<div>' +
+          '<ds-widget-clock theme="dark"></ds-widget-clock></div>';
+
+
+
+        var element = $compile(markup)(scope);
+        scope.$digest();
+
+        expect(element.html()).to.have.string('class="widget-clock ng-scope dark');
+      });
+    });
+  });
+
+
+
+});
+
+function getGMTText(offset) {
+    
+    
+
+  var f = offset > 0 ? Math.floor(offset) : Math.ceil(offset),
+    s = Math.round(((offset > 0 ? offset : offset * -1) % 1) *100);
+
+  return 'GMT' + (offset === 0 ? '' : ((offset > 0 ? ' +' : ' ') + lpad(f) + '.' + rpad(s).substring(0, 2)));
+
+}
+
+function lpad(num) {
+  if (num < 0) {
+    return (num > -10 ? '-0' : '-') + (num * -1);
+  } else {
+    return (num < 10 ? '0' : '') + num;
+  }
+
+}
+
+function rpad(num) {
+  return num + (num < 10 ? '0' : '');
+}

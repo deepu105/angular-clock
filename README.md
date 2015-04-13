@@ -1,8 +1,8 @@
-# angular-chart.js
+# angular-clock
 
 Beautiful, reactive, responsive Clock widgets for Angular.JS using SVG. 
 
-[Demo](http://jtblin.github.io/angular-chart.js/)
+[Demo](http://deepu105.github.io/angular-clock/)
 
 # Installation
 

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>Clocks</title>
+  <link rel="stylesheet" href="../../dist/angular-clock.css">
+  <link href="../../examples/bootstrap.css" rel="stylesheet">
+</head>
+<body ng-app="clocks" id="top">
+  <div class="container">
+    <section id="charts">
+      <div class="page-header">
+        <h1>Clocks</h1>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-sm-12" id="line-chart" ng-controller="BaseCtrl">
+          <div class="panel panel-default">
+            <div class="panel-heading">Default Clock</div>
+            <div class="panel-body">
+                <ds-widget-clock></ds-widget-clock>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        
+      </div>
+      <div class="row">
+      </div>
+    </section>
+  </div>
+
+  <script src="../../bower_components/angular/angular.min.js"></script>
+  <script src="../../angular-clock.js"></script>
+  <script src="clock.js"></script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+{
+  "requireCurlyBraces": [
+    "try",
+    "catch",
+    "do"
+  ],
+  "requireCamelCaseOrUpperCaseIdentifiers": "ignoreProperties",
+  "requireCapitalizedConstructors": true,
+  "validateIndentation": 2,
+  "validateQuoteMarks": "'",
+
+  "disallowQuotedKeysInObjects": true,
+  "disallowSpaceAfterObjectKeys": true,
+
+  "requireSpaceBeforeBinaryOperators": [
+    "=", "+=", "-=", "*=", "/=", "%=", "<<=", ">>=", ">>>=",
+    "&=", "|=", "^=", "+=",
+
+    "+", "-", "*", "/", "%", "<<", ">>", ">>>", "&",
+    "|", "^", "&&", "||", "===", "==", ">=",
+    "<=", "<", ">", "!=", "!=="
+  ],
+  "requireSpaceAfterBinaryOperators": true,
+  "requireSpacesInConditionalExpression": true,
+  "requireSpaceBeforeBlockStatements": true,
+  "requireSpacesInForStatement": true,
+  "requireLineFeedAtFileEnd": true,
+  "requireSpacesInFunctionExpression": {
+    "beforeOpeningCurlyBrace": true
+  },
+  "requireDotNotation": true,
+  "disallowSpacesInsideArrayBrackets": "all",
+  "disallowSpacesInsideParentheses": true,
+
+
+  "validateJSDoc": {
+    "checkParamNames": true,
+    "requireParamTypes": true
+  },
+
+  "disallowMultipleLineBreaks": true,
+  "disallowNewlineBeforeBlockStatements": true,
+  "disallowKeywords": [ "with" ],
+
+  "excludeFiles": [
+    "bower_components/**",
+    "node_modules/**",
+    "dist/**",
+    "test/coverage/**",
+    "examples/smoothscroll.min.js"
+  ]
+}
