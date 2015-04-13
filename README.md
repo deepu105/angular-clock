@@ -1,14 +1,29 @@
-# angular-clock
+# Angular Clock Widget 
 
-Beautiful, reactive, responsive Clock widgets for Angular.JS using SVG. 
+Responsive, beautiful clocks for [AngularJS](http://angularjs.org) built using [SVG](https://developer.mozilla.org/en/docs/Web/SVG) 
 
 [Demo](http://deepu105.github.io/angular-clock/)
 
-# Installation
+# Utilisation
 
-    bower install angular-clock --save
-    
-or copy the files from `dist/`. Then add the sources to your code (adjust paths as needed) after 
+*   [Getting started](#getting_started)
+*   [Directive](#directive)
+*   [Styling](#style)
+
+# Getting started
+
+### Dependencies
+
+This repository contains **native AngularJS directives** to render a clock face. The **only required dependencies** are: 
+
+*   [AngularJS](http://angularjs.org) (tested with 1.3.14 although it probably works with older versions)
+
+### Installation
+
+bower install angular-ui-clock --save
+
+Alternatively files can be downloaded [downloaded from Github](https://github.com/deepu105/angular-clock).
+and copy the files from `dist/`. Then add the sources to your code (adjust paths as needed) after 
 adding the dependencies for Angular first:
 
 ```html
@@ -16,25 +31,35 @@ adding the dependencies for Angular first:
 <script src="/bower_components/angular-clock/dist/angular-clock.js"></script>
 ```
 
-# Utilisation
 
-There are 6 types of charts so 6 directives: `chart-line`, `chart-bar`, `chart-radar`, `chart-pie`, 
-`chart-polar-area`, `chart-doughnut`.
+Whichever method you choose the good news is that the overall size is very small: &lt; 4kb for all directives (~1kb with gzip compression!)
 
-They all use mostly the same API:
 
-- `data`: series data
-- `labels`: x axis labels (line, bar, radar) or series labels (pie, doughnut, polar area)
-- `options`: chart options (as from [Chart.js documentation](http://www.chartjs.org/docs/))
-- `series`: (default: `[]`): series labels (line, bar, radar)
-- `colours`: data colours (will use default colours if not specified)
-- `getColour`: function that returns a colour in case there are not enough (will use random colours if not specified)
-- `click`: onclick event handler
-- `hover`: onmousemove event handler
-- `legend`: (default: `false`): show legend below the chart
+As soon as you've got all the files downloaded and included in your page you just need to declare a dependency on the `ds.clock` [module](http://docs.angularjs.org/guide/module):   
 
-There is another directive `chart-base` that takes an extra attribute `chart-type` to define the type
-dynamically, see [stacked bar example](http://jtblin.github.io/angular-chart.js/examples/stacked-bars.html).
+```javascript
+angular.module('myModule', ['ds.clock']);
+```
+
+### CSS
+
+You need to include a link to the css file in your page.
+
+```html
+<link rel="stylesheet" href="bower_components/dist/angular-clock.css">
+```
+### Options
+
+There are several options that you can set as attributes on the directive element
+
+1.  `show-secs` : shows second in digital clock, (default: `true`)
+2.  `show-am-pm` : shows am/pm in digital clock, (default: `false`)
+3.  `gmt-offset` : shows time for the given [GMT offset](http://en.wikipedia.org/wiki/List_of_UTC_time_offsets) in clock, (default: `false`, shows local time) example: India -> 5.30, Singapore -> 8 , venezula -> -4.30, Nepal -> 5.45
+4.  `show-digital`: shows digital clock, (default: `true` if both show-analog &show-digital are not set)
+5.  `show-analog` : shows analog clock, (default: `true` if both show-analog &show-digital are not set)
+6.  `show-gmt-info` : shows GMT offset value, (default: `false`)
+7.  `theme` : analog clockface theme, (default: `light`)
+
 
 ## Browser compatibility
 
@@ -46,56 +71,19 @@ For IE8 and older browsers, you will need SVG polyfills and Shims
 ## Markup
 
 ```html
-<canvas id="line" class="chart chart-line" data="data" labels="labels" 
-	legend="true" series="series" click="onClick"></canvas> 
+<ds-widget-clock theme="dark" show-secs="true" show-am-pm></ds-widget-clock>
 ```
 
-## Javascript
-
-```javascript
-angular.module("app", ["chart.js"]).controller("LineCtrl", ['$scope', '$timeout', function ($scope, $timeout) {
-
-  $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
-  $scope.series = ['Series A', 'Series B'];
-  $scope.data = [
-    [65, 59, 80, 81, 56, 55, 40],
-    [28, 48, 40, 19, 86, 27, 90]
-  ];
-  $scope.onClick = function (points, evt) {
-    console.log(points, evt);
-  };
-  
-  // Simulate async data update
-  $timeout(function () {
-    $scope.data = [
-      [28, 48, 40, 19, 86, 27, 90],
-      [65, 59, 80, 81, 56, 55, 40]
-    ];
-  }, 3000);
-}]);
-```
 
 ## Reactive
 
-angular-chart.js watch updates on data, series, labels, colours and options and will update, or destroy and recreate, 
-the chart on changes.
+angular clock widget is fully responsive, resize browser to see it in action
 
-
-
-## Colours
-
-There are a set of 7 default colours. Colours can be replaced using the `colours` attribute.
-If there is more data than colours, colours are generated randomly or can be provided 
-via a function through the `getColour` attribute.
-
-Hex colours are converted to Chart.js colours automatically, 
-including different shades for highlight, fill, stroke, etc.
 
 # Issues
  
-Please check if issue exists and otherwise open issue in [github](https://github.com/jtblin/angular-chart.js/issues). 
+Please check if issue exists and otherwise open issue in [github](https://github.com/deepu105/angular-clock/issues?state=open)
 **Please add a link to a plunker, jsbin, or equivalent.** 
-Here is a [jsbin template](http://jsbin.com/dufibi/3/edit?html,js,output) for convenience.
 
 # Contributing
  
@@ -114,7 +102,9 @@ Thank you!
 
 # Author
 
-Deepu K Sasidharan
+Designed and built by [Deepu K Sasidharan](https://github.com/jtblin)
+
+[Issues](https://github.com/deepu105/angular-clock/issues?state=open)
 
 Inspired from [this demo](https://gist.github.com/BinaryMuse/6100363).
 
