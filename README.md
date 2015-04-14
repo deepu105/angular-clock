@@ -73,9 +73,9 @@ For IE8 and older browsers, you will need SVG polyfills and Shims
 <ds-widget-clock theme="dark" show-secs="true" show-am-pm></ds-widget-clock>
 ```
 
-## Reactive
+## Reactive & Responsive
 
-angular clock widget is fully responsive, resize browser to see it in action
+angular clock widget is reactive and fully responsive
 
 
 # Issues
