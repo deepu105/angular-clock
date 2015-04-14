@@ -1,16 +1,16 @@
 {
   "name": "angular-clock-face",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "main": [
-      "./dist/angular-clock.js",
-      "./dist/angular-clock.css"
+    "./dist/angular-clock.js",
+    "./dist/angular-clock.css"
   ],
   "authors": [
-      "Deepu K Sasidharan <d4udts@gmail.com>"
+    "Deepu K Sasidharan <d4udts@gmail.com>"
   ],
   "repository": {
     "type": "git",
-      "url": "git://github.com/deepu105/angular-clock.git"
+    "url": "git://github.com/deepu105/angular-clock.git"
   },
   "description": "An angular.js directive for clock svg widgets - reactive, responsive, beautiful.",
   "moduleType": [

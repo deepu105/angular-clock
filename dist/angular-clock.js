@@ -2,15 +2,6 @@
   'use strict';
 
   /* <ds-widget-clock data-gmt-offset="0"></ds-widget-clock> */
-  /*  var defaults = {
-    showSecs: false,
-    showAmPm: false,
-    gmtOffset: false,
-    showDigital: true,
-    showAnalog: true,
-    showGmtInfo: false,
-    theme:"light"
-  };*/
   var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
@@ -34,7 +25,7 @@
         var o = {}; //angular.copy(defaults)
         var gmtOffset = scope.gmtOffset;
         //o.gmtOffset = (gmtOffset !== undefined && gmtOffset !== null) ? parseFloat(gmtOffset) : false;
-        o.showSecs = attrs.showSecs !== undefined ? attrs.showSecs : true;
+        o.showSecs = attrs.hideSecs !== undefined ? false : true;
         o.showAmPm = attrs.showAmPm !== undefined ? true : false;
         o.showDigital = attrs.showDigital !== undefined ? true : false;
         o.showAnalog = attrs.showAnalog !== undefined ? true : false;
