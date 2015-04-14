@@ -41,11 +41,17 @@ You need to include a link to the css file in your page.
 ```html
 <link rel="stylesheet" href="bower_components/dist/angular-clock.css">
 ```
+
+If you need the default digital clock font ```Syncopate```, include this. Else check styling section to use your own font
+```html
+<link href='//fonts.googleapis.com/css?family=Syncopate:400,700' rel='stylesheet' type='text/css'>
+```
+
 ### Options
 
 There are several options that you can set as attributes on the directive element
 
-1.  `show-secs` : shows second in digital clock, (default: `true`)
+1.  `hide-secs` : hides seconds in digital clock, (default: `false`)
 2.  `show-am-pm` : shows am/pm in digital clock, (default: `false`)
 3.  `gmt-offset` : shows time for the given [GMT offset](http://en.wikipedia.org/wiki/List_of_UTC_time_offsets) in clock, (default: `false`, shows local time) example: India -> 5.30, Singapore -> 8 , venezula -> -4.30, Nepal -> 5.45
 4.  `show-digital`: shows digital clock, (default: `true` if both show-analog &show-digital are not set)
