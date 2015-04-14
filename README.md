@@ -4,12 +4,6 @@ Responsive, beautiful clocks for [AngularJS](http://angularjs.org) built using [
 
 [Demo](http://deepu105.github.io/angular-clock/)
 
-# Utilisation
-
-*   [Getting started](#getting_started)
-*   [Directive](#directive)
-*   [Styling](#style)
-
 # Getting started
 
 ### Dependencies
@@ -30,7 +24,6 @@ adding the dependencies for Angular first:
 <script src="../bower_components/angular/angular.min.js"></script>
 <script src="/bower_components/angular-clock/dist/angular-clock.js"></script>
 ```
-
 
 Whichever method you choose the good news is that the overall size is very small: &lt; 4kb for all directives (~1kb with gzip compression!)
 
@@ -74,7 +67,6 @@ For IE8 and older browsers, you will need SVG polyfills and Shims
 <ds-widget-clock theme="dark" show-secs="true" show-am-pm></ds-widget-clock>
 ```
 
-
 ## Reactive
 
 angular clock widget is fully responsive, resize browser to see it in action
@@ -83,6 +75,7 @@ angular clock widget is fully responsive, resize browser to see it in action
 # Issues
  
 Please check if issue exists and otherwise open issue in [github](https://github.com/deepu105/angular-clock/issues?state=open)
+
 **Please add a link to a plunker, jsbin, or equivalent.** 
 
 # Contributing
@@ -97,7 +90,6 @@ Pull requests welcome!
 ## Contributors
 
 Thank you!
-
 
 
 # Author

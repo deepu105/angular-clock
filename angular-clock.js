@@ -25,7 +25,7 @@
         var o = {}; //angular.copy(defaults)
         var gmtOffset = scope.gmtOffset;
         //o.gmtOffset = (gmtOffset !== undefined && gmtOffset !== null) ? parseFloat(gmtOffset) : false;
-        o.showSecs = attrs.showSecs !== undefined ? attrs.showSecs : true;
+        o.showSecs = attrs.hideSecs !== undefined ? false : true;
         o.showAmPm = attrs.showAmPm !== undefined ? true : false;
         o.showDigital = attrs.showDigital !== undefined ? true : false;
         o.showAnalog = attrs.showAnalog !== undefined ? true : false;

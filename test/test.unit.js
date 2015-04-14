@@ -3,8 +3,8 @@
 /*global inject:true*/
 /*global expect:true*/
 /*global sinon:true*/
+'use strict';
 describe('Angular Clock Unit testing', function() {
-  'use strict';
 
   var $compile, scope, sandbox;
 
@@ -41,7 +41,7 @@ describe('Angular Clock Unit testing', function() {
             type + '" data-show-gmt-info></ds-widget-clock></div>';
 
 
-          //var mock = sandbox.mock(Chart.prototype);   
+          //var mock = sandbox.mock(Chart.prototype);
           //mock.expects(type);
 
           var element = $compile(markup)(scope);
@@ -73,11 +73,9 @@ describe('Angular Clock Unit testing', function() {
 });
 
 function getGMTText(offset) {
-    
-    
 
   var f = offset > 0 ? Math.floor(offset) : Math.ceil(offset),
-    s = Math.round(((offset > 0 ? offset : offset * -1) % 1) *100);
+    s = Math.round(((offset > 0 ? offset : offset * -1) % 1) * 100);
 
   return 'GMT' + (offset === 0 ? '' : ((offset > 0 ? ' +' : ' ') + lpad(f) + '.' + rpad(s).substring(0, 2)));
 
