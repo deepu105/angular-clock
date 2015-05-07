@@ -127,6 +127,9 @@
       // using supplied offset
       var offsetNow = new Date(utc + (3600000 * o.gmtOffset));
       return {
+        year: offsetNow.getFullYear(),
+        month: offsetNow.getMonth() + 1,
+        day: offsetNow.getDate(),
         hrs: offsetNow.getHours(),
         mins: offsetNow.getMinutes(),
         secs: offsetNow.getSeconds()
@@ -134,6 +137,9 @@
     } else {
       // Use local time
       return {
+        year: now.getFullYear(),
+        month: now.getMonth() + 1,
+        day: now.getDate(),
         hrs: now.getHours(),
         mins: now.getMinutes(),
         secs: now.getSeconds()
@@ -143,6 +149,9 @@
 
   function timeText(d, o) {
     return '' +
+      d.year + '-' +
+      d.month + '-' +
+      d.day + ' ' +
       (o.showAmPm ? ((d.hrs % 12) === 0 ? 12 : (d.hrs % 12)) : d.hrs) + ':' +
       lpad(d.mins) +
       (o.showSecs ? ':' + lpad(d.secs) : '') +
