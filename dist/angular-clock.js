@@ -30,6 +30,7 @@
         o.showDigital = attrs.showDigital !== undefined ? true : false;
         o.showAnalog = attrs.showAnalog !== undefined ? true : false;
         o.showGmtInfo = attrs.showGmtInfo !== undefined ? true : false;
+        o.startTime = parseInt(attrs.startTime, 10); // ms
         scope.theme = attrs.theme !== undefined ? attrs.theme : "light";
         if (!o.showDigital && !o.showAnalog) {
           o.showAnalog = true;
@@ -45,6 +46,9 @@
         scope.minors = new Array(60);
         var date = null;
         var tick = function() {
+          if (!isNaN(o.startTime)) {
+            o.startTime = o.startTime + 1000;
+          }
           date = getDate(o);
           scope.date = date;
           if (o.showDigital) {
@@ -112,7 +116,7 @@
   }
   // Checkfor offset and get correct time
   function getDate(o) {
-    var now = new Date();
+    var now = (!isNaN(o.startTime)) ? new Date(o.startTime) : new Date();
     if (o.gmtOffset !== null && o.gmtOffset !== false) {
       // Use GMT + gmtOffset
       // convert to msec
@@ -123,6 +127,9 @@
       // using supplied offset
       var offsetNow = new Date(utc + (3600000 * o.gmtOffset));
       return {
+        year: offsetNow.getFullYear(),
+        month: offsetNow.getMonth() + 1,
+        day: offsetNow.getDate(),
         hrs: offsetNow.getHours(),
         mins: offsetNow.getMinutes(),
         secs: offsetNow.getSeconds()
@@ -130,6 +137,9 @@
     } else {
       // Use local time
       return {
+        year: now.getFullYear(),
+        month: now.getMonth() + 1,
+        day: now.getDate(),
         hrs: now.getHours(),
         mins: now.getMinutes(),
         secs: now.getSeconds()
@@ -139,6 +149,9 @@
 
   function timeText(d, o) {
     return '' +
+      d.year + '-' +
+      d.month + '-' +
+      d.day + ' ' +
       (o.showAmPm ? ((d.hrs % 12) === 0 ? 12 : (d.hrs % 12)) : d.hrs) + ':' +
       lpad(d.mins) +
       (o.showSecs ? ':' + lpad(d.secs) : '') +
