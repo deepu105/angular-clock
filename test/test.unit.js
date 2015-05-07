@@ -66,6 +66,19 @@ describe('Angular Clock Unit testing', function() {
         expect(element.html()).to.have.string('class="widget-clock ng-scope dark');
       });
     });
+
+    describe('clock set start time', function() {
+      it('set a intial time and clock is base on this time to tick.', function() {
+          var date = new Date();
+          var ms = date.getTime();
+          var markup = '<div><ds-widget-clock start-time="' +
+            ms + '" data-show-gmt-info></ds-widget-clock></div>';
+          var element = $compile(markup)(scope);
+
+          scope.$digest();
+          expect(element.html()).to.match(/<span class="hours[^>]+>([^<]+)<\/span>/);
+      });
+    });
   });
 
 
