@@ -69,19 +69,30 @@ describe('Angular Clock Unit testing', function() {
 
     describe('clock set start time', function() {
       it('set a intial time and clock is base on this time to tick.', function() {
-          var date = new Date();
-          var ms = date.getTime();
-          var markup = '<div><ds-widget-clock start-time="' +
-            ms + '" data-show-gmt-info></ds-widget-clock></div>';
-          var element = $compile(markup)(scope);
+        var date = new Date();
+        var ms = date.getTime();
+        var markup = '<div><ds-widget-clock start-time="' +
+          ms + '" data-show-gmt-info></ds-widget-clock></div>';
+        var element = $compile(markup)(scope);
 
-          scope.$digest();
-          expect(element.html()).to.match(/<span class="hours[^>]+>([^<]+)<\/span>/);
+        scope.$digest();
+        expect(element.html()).to.match(/<span class="hours[^>]+>([^<]+)<\/span>/);
+      });
+    });
+
+    describe('digital clock format', function() {
+      it('replaces the element with the appropriate content for digital clock in given format', function() {
+        var format = 'dd-MMM-yyyy hh:mm:ss a';
+        var markup = '<div>' +
+          '<ds-widget-clock show-digital digital-format="\'' + format + '\'"></ds-widget-clock></div>';
+
+        var element = $compile(markup)(scope);
+        scope.$digest();
+
+        expect(element.html()).to.match(/<span class="hours[^>]+>\d{2}[-][A-Z][a-z]{2}[-]\d{4}[ ]\d{2}[:]\d{2}[:]\d{2}[ ]([^<]+)<\/span>/);
       });
     });
   });
-
-
 
 });
 

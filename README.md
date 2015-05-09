@@ -51,8 +51,8 @@ If you need the default digital clock font ```Syncopate```, include this. Else c
 
 There are several options that you can set as attributes on the directive element
 
-1.  `hide-secs` : hides seconds in digital clock, (default: `false`)
-2.  `show-am-pm` : shows am/pm in digital clock, (default: `false`)
+1.  `start-time` : init clock with specific time in milliseconds, (default: `undefined`)
+2.  `digital-format` : digital clock format in [angular date filter format](https://docs.angularjs.org/api/ng/filter/date) (default: `'HH-mm-ss'`). Pass as string enclosed in single quate
 3.  `gmt-offset` : shows time for the given [GMT offset](http://en.wikipedia.org/wiki/List_of_UTC_time_offsets) in clock, (default: `false`, shows local time) example: India -> 5.30, Singapore -> 8 , venezula -> -4.30, Nepal -> 5.45
 4.  `show-digital`: shows digital clock, (default: `true` if both show-analog &show-digital are not set)
 5.  `show-analog` : shows analog clock, (default: `true` if both show-analog &show-digital are not set)
@@ -70,7 +70,7 @@ For IE8 and older browsers, you will need SVG polyfills and Shims
 ## Markup
 
 ```html
-<ds-widget-clock theme="dark" show-secs="true" show-am-pm></ds-widget-clock>
+<ds-widget-clock theme="dark" show-secs="true" digital-format="'hh:mm:ss a'"></ds-widget-clock>
 ```
 
 ## Reactive & Responsive
@@ -89,9 +89,11 @@ Please check if issue exists and otherwise open issue in [github](https://github
 Pull requests welcome!
 
 1. Fork the repo
-1. Make your changes
-1. Run tests: `npm test`
-1. Submit pull request
+2. Make your changes
+3. Write unit tests under test directory
+4. Update examples under examples directory
+5. Run tests: `npm test`, `gulp test`
+6. Submit pull request
 
 ## Contributors
 

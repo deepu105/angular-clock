@@ -32,15 +32,6 @@
                                 Angular Clock
                             </a>
                         </li>
-                        <!--<li class="dropdown">
-<a role="button" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
-Directives <b class="caret"></b>
-</a>
-<ul class="dropdown-menu">
-<li><a ng-href="#widget-clock">ds-widget-clock</a>
-</li>
-</ul>
-</li>-->
                         <li><a href="#getting_started">Getting started</a>
                         </li>
                         <li><a href="#directives">Directives</a>
@@ -64,16 +55,12 @@ Directives <b class="caret"></b>
         <div class="container-fluid">
             <div class="text-center aspect-ratio" id="container" ng-controller="HeadCtrl">
                 <div style="width:200px;margin:0 auto;">
-                    <ds-widget-clock theme="blue-light" show-secs="true" show-am-pm></ds-widget-clock>
+                    <ds-widget-clock theme="blue-light" digital-format="'hh:mm:ss a EEEE'"></ds-widget-clock>
                 </div>
                 <div class="header">
-                    <h1>
-                        Angular Clock Widget
-                    </h1>
-
+                    <h1>Angular Clock Widget</h1>
                     <p>Responsive, beautiful clocks for <a href="http://angularjs.org">AngularJS</a> built using <a href="https://developer.mozilla.org/en/docs/Web/SVG">SVG</a>
                     </p>
-
                     <p>
                         <a class="btn btn-default btn-lg" href="https://github.com/deepu105/angular-clock"><i class="icon-github"></i>Code on Github</a>
                         <a class="btn btn-success btn-lg" href="../dist/angular-clock.js.tar.gz" download="angular-clock.js.tar.gz">
@@ -116,8 +103,8 @@ Directives <b class="caret"></b>
                 <h3>Options</h3>
                 <p>There are several options that you can set as attributes on the directive element(can use other angular flavors like data-*, ng-attr-*, x-* also)</p>
                 <ol class="chart-legend">
-                    <li><code>hide-secs</code> : hides seconds in digital clock, (default: <code>false</code>)</li>
-                    <li><code>show-am-pm</code> : shows am/pm in digital clock, (default: <code>false</code>)</li>
+                    <li><code>start-time</code> : init clock with specific time in milliseconds, (default: <code>undefined</code>)</li>
+                    <li><code>digital-format</code> : digital clock format in <a href="https://docs.angularjs.org/api/ng/filter/date">angular date filter format</a> (default: <code>'HH-mm-ss'</code>). Pass as string enclosed in single quate</li>
                     <li><code>gmt-offset</code> : shows time for the given <a href="http://en.wikipedia.org/wiki/List_of_UTC_time_offsets">GMT offset</a> in clock, (default: <code>false</code>, shows local time) example: India -> 5.30, Singapore -> 8 , venezula -> -4.30, Nepal -> 5.45</li>
                     <li><code>show-digital</code>: shows digital clock, (default: <code>true</code> if both show-analog &amp;show-digital are not set)</li>
                     <li><code>show-analog</code> : shows analog clock, (default: <code>true</code> if both show-analog &amp;show-digital are not set)</li>
@@ -149,6 +136,34 @@ Directives <b class="caret"></b>
                             </tab>
                             <tab heading="Javascript">
                                 <pre><code data-language="javascript">angular.module("app", ["ds.clock"]).controller("AppCtrl", function ($scope) {
+
+});
+              </code></pre>
+                            </tab>
+                        </tabset>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 col-sm-12" id="line-chart" ng-controller="BaseCtrl">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Clock with Start Time</div>
+                            <div class="panel-body text-center">
+                                <div class="">
+                                    <ds-widget-clock start-time="{{startTimeValue}}"></ds-widget-clock>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-6 col-sm-12 code">
+                        <tabset>
+                            <tab heading="Markup">
+                                <pre><code ng-non-bindable
+                                data-language="xml">&lt;ds-widget-clock start-time="{{startTimeValue}}"&gt;&lt;/ds-widget-clock&gt;</code></pre>
+                            </tab>
+                            <tab heading="Javascript">
+                                <pre><code data-language="javascript">angular.module("app", ["ds.clock"]).controller("AppCtrl", function ($scope) {
+        $scope.startTimeValue = 1430990693334;
 
 });
               </code></pre>
@@ -234,7 +249,7 @@ Directives <b class="caret"></b>
                             <div class="panel-heading">Clock with AM/PM in Dark theme</div>
                             <div class="panel-body text-center">
                                 <div class="">
-                                    <ds-widget-clock theme="dark" show-am-pm></ds-widget-clock>
+                                    <ds-widget-clock theme="dark" digital-format="'hh:mm:ss a'"></ds-widget-clock>
                                 </div>
 
                             </div>
@@ -243,7 +258,7 @@ Directives <b class="caret"></b>
                     <div class="col-lg-8 col-md-6 col-sm-12 code">
                         <tabset>
                             <tab heading="Markup">
-                                <pre><code data-language="xml">&lt;ds-widget-clock theme="dark" show-am-pm&gt;&lt;/ds-widget-clock&gt;</code></pre>
+                                <pre><code data-language="xml">&lt;ds-widget-clock theme="dark" digital-format="'hh:mm:ss a'"&gt;&lt;/ds-widget-clock&gt;</code></pre>
                             </tab>
                             <tab heading="Javascript">
                                 <pre><code data-language="javascript">angular.module("app", ["ds.clock"]).controller("AppCtrl", function ($scope) {
@@ -257,17 +272,20 @@ Directives <b class="caret"></b>
                 <div class="row">
                     <div class="col-lg-4 col-md-6 col-sm-12" id="line-chart" ng-controller="BaseCtrl">
                         <div class="panel panel-default">
-                            <div class="panel-heading">Digital clock</div>
+                            <div class="panel-heading">Digital clocks</div>
                             <div class="panel-body text-center">
                                 <div class="">
-                                    <ds-widget-clock ng-attr-show-digital hide-secs></ds-widget-clock>
-                                    <br>
+                                    <ds-widget-clock ng-attr-show-digital digital-format="'HH:mm'"></ds-widget-clock>
+                                    <hr>
                                     <ds-widget-clock data-show-digital></ds-widget-clock>
-                                    <br>
-                                    <ds-widget-clock show-digital show-am-pm></ds-widget-clock>
-                                    <br>
-                                    <ds-widget-clock show-digital show-am-pm gmt-offset="5.3" show-gmt-info></ds-widget-clock>
-
+                                    <hr>
+                                    <ds-widget-clock show-digital digital-format="'hh:mm:ss a'"></ds-widget-clock>
+                                    <hr>
+                                    <ds-widget-clock show-digital digital-format="'hh:mm:ss a'" gmt-offset="5.3" show-gmt-info></ds-widget-clock>
+                                    <hr>
+                                    <ds-widget-clock show-digital digital-format="'dd-MMM-yyyy hh:mm:ss a'"></ds-widget-clock>
+                                    <hr>
+                                    <ds-widget-clock show-digital digital-format="'EEEE MMMM d,yyyy hh:mm:ss a Z'"></ds-widget-clock>
                                 </div>
 
                             </div>
@@ -277,13 +295,17 @@ Directives <b class="caret"></b>
                         <tabset>
                             <tab heading="Markup">
                                 <pre><code data-language="xml">
-&lt;ds-widget-clock data-show-digital hide-secs&gt;&lt;/ds-widget-clock&gt;
-&lt;br&gt;
+&lt;ds-widget-clock data-show-digital digital-format="'HH:mm'"&gt;&lt;/ds-widget-clock&gt;
+&lt;hr&gt;
 &lt;ds-widget-clock data-show-digital&gt;&lt;/ds-widget-clock&gt;
-&lt;br&gt;
-&lt;ds-widget-clock show-digital show-am-pm&gt;&lt;/ds-widget-clock&gt;
-&lt;br&gt;
-&lt;ds-widget-clock show-digital show-am-pm gmt-offset="5.3" show-gmt-info&gt;&lt;/ds-widget-clock&gt;
+&lt;hr&gt;
+&lt;ds-widget-clock show-digital digital-format="'hh:mm:ss a'">&gt;&lt;/ds-widget-clock&gt;
+&lt;hr&gt;
+&lt;ds-widget-clock show-digital digital-format="'hh:mm:ss a'"> gmt-offset="5.3" show-gmt-info&gt;&lt;/ds-widget-clock&gt;
+&lt;hr&gt;
+&lt;ds-widget-clock show-digital digital-format="'dd-MMM-yyyy hh:mm:ss a'">&gt;&lt;/ds-widget-clock&gt;
+&lt;hr&gt;
+&lt;ds-widget-clock show-digital digital-format="'EEEE MMMM d,yyyy hh:mm:ss a Z'">&gt;&lt;/ds-widget-clock&gt;
 </code></pre>
                             </tab>
                             <tab heading="Javascript">
@@ -393,7 +415,7 @@ Directives <b class="caret"></b>
                             <div class="panel-heading">Custom Digital Clock Theme</div>
                             <div class="panel-body text-center">
                                 <div class="">
-                                    <ds-widget-clock show-digital theme="blue-light" show-am-pm></ds-widget-clock>
+                                    <ds-widget-clock show-digital theme="blue-light" digital-format="'hh:mm:ss a'"></ds-widget-clock>
                                 </div>
 
                             </div>
@@ -404,7 +426,7 @@ Directives <b class="caret"></b>
                             <tab heading="Markup">
                                 <pre><code data-language="xml">
 &lt;!-- Theme blue-light is defined is css --&gt;
-&lt;ds-widget-clock show-digital theme="blue-light" show-am-pm&gt;&lt;/ds-widget-clock&gt;</code></pre>
+&lt;ds-widget-clock show-digital theme="blue-light" digital-format="'hh:mm:ss a'"&gt;&lt;/ds-widget-clock&gt;</code></pre>
                             </tab>
                             <tab heading="CSS">
                                 <pre><code data-language="css">
@@ -448,7 +470,7 @@ Directives <b class="caret"></b>
         <script src="../bower_components/rainbow/js/language/generic.js"></script>
         <script src="../bower_components/rainbow/js/language/html.js"></script>
         <script src="../bower_components/rainbow/js/language/javascript.js"></script>
-        <script src="../dist/angular-clock.min.js"></script>
+        <script src="../angular-clock.js"></script>
         <script src="smoothscroll.min.js"></script>
         <script src="app.js"></script>
     </body>
