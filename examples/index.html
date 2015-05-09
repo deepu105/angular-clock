@@ -116,6 +116,7 @@ Directives <b class="caret"></b>
                 <h3>Options</h3>
                 <p>There are several options that you can set as attributes on the directive element(can use other angular flavors like data-*, ng-attr-*, x-* also)</p>
                 <ol class="chart-legend">
+                    <li><code>start-time</code> : clock init with specific time, (default: <code>undefined</code>)</li>
                     <li><code>hide-secs</code> : hides seconds in digital clock, (default: <code>false</code>)</li>
                     <li><code>show-am-pm</code> : shows am/pm in digital clock, (default: <code>false</code>)</li>
                     <li><code>gmt-offset</code> : shows time for the given <a href="http://en.wikipedia.org/wiki/List_of_UTC_time_offsets">GMT offset</a> in clock, (default: <code>false</code>, shows local time) example: India -> 5.30, Singapore -> 8 , venezula -> -4.30, Nepal -> 5.45</li>
@@ -149,6 +150,34 @@ Directives <b class="caret"></b>
                             </tab>
                             <tab heading="Javascript">
                                 <pre><code data-language="javascript">angular.module("app", ["ds.clock"]).controller("AppCtrl", function ($scope) {
+
+});
+              </code></pre>
+                            </tab>
+                        </tabset>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 col-sm-12" id="line-chart" ng-controller="BaseCtrl">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Clock with Start Time</div>
+                            <div class="panel-body text-center">
+                                <div class="">
+                                    <ds-widget-clock start-time="{{startTimeValue}}"></ds-widget-clock>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-6 col-sm-12 code">
+                        <tabset>
+                            <tab heading="Markup">
+                                <pre><code
+                                data-language="xml">&lt;ds-widget-clock start-time="{{startTimeValue}}"&gt;&lt;/ds-widget-clock&gt;</code></pre>
+                            </tab>
+                            <tab heading="Javascript">
+                                <pre><code data-language="javascript">angular.module("app", ["ds.clock"]).controller("AppCtrl", function ($scope) {
+        $scope.startTimeValue = 1430990693334;
 
 });
               </code></pre>

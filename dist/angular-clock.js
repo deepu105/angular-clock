@@ -30,6 +30,7 @@
         o.showDigital = attrs.showDigital !== undefined ? true : false;
         o.showAnalog = attrs.showAnalog !== undefined ? true : false;
         o.showGmtInfo = attrs.showGmtInfo !== undefined ? true : false;
+        o.startTime = parseInt(attrs.startTime, 10); // ms
         scope.theme = attrs.theme !== undefined ? attrs.theme : "light";
         if (!o.showDigital && !o.showAnalog) {
           o.showAnalog = true;
@@ -45,6 +46,9 @@
         scope.minors = new Array(60);
         var date = null;
         var tick = function() {
+          if (!isNaN(o.startTime)) {
+            o.startTime = o.startTime + 1000;
+          }
           date = getDate(o);
           scope.date = date;
           if (o.showDigital) {
@@ -112,7 +116,7 @@
   }
   // Checkfor offset and get correct time
   function getDate(o) {
-    var now = new Date();
+    var now = (!isNaN(o.startTime)) ? new Date(o.startTime) : new Date();
     if (o.gmtOffset !== null && o.gmtOffset !== false) {
       // Use GMT + gmtOffset
       // convert to msec
