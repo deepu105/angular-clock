@@ -55,7 +55,13 @@
         <div class="container-fluid">
             <div class="text-center aspect-ratio" id="container" ng-controller="HeadCtrl">
                 <div style="width:200px;margin:0 auto;">
-                    <ds-widget-clock theme="blue-light" digital-format="'hh:mm:ss a EEEE'"></ds-widget-clock>
+                    <ds-widget-clock theme="theme" show-digital="digital" show-analog  digital-format="'hh:mm:ss a EEEE'"></ds-widget-clock>
+                    <select class="form-control" ng-model="theme" placeholder="Select a theme here">
+                        <option value="blue-light">Blue-Light</option>
+                        <option value="dark">Dark</option>
+                        <option value="light">Light</option>
+                    </select>
+                    <input type="checkbox" ng-model="digital"/> show digital
                 </div>
                 <div class="header">
                     <h1>Angular Clock Widget</h1>
@@ -64,7 +70,7 @@
                     <p>
                         <a class="btn btn-default btn-lg" href="https://github.com/deepu105/angular-clock"><i class="icon-github"></i>Code on Github</a>
                         <a class="btn btn-success btn-lg" href="../dist/angular-clock.js.tar.gz" download="angular-clock.js.tar.gz">
-                            <i class="fa fa-download"></i> Download <small>(0.4.0)</small>
+                            <i class="fa fa-download"></i> Download <small>(0.5.0)</small>
                         </a>
                     </p>
                 </div>
@@ -104,14 +110,16 @@
                 <p>There are several options that you can set as attributes on the directive element(can use other angular flavors like data-*, ng-attr-*, x-* also)</p>
                 <ol class="chart-legend">
                     <li><code>start-time</code> : init clock with specific time in milliseconds, (default: <code>undefined</code>)</li>
-                    <li><code>digital-format</code> : digital clock format in <a href="https://docs.angularjs.org/api/ng/filter/date">angular date filter format</a> (default: <code>'HH-mm-ss'</code>). Pass as string enclosed in single quate</li>
+                    <li><code>digital-format</code> : digital clock format in <a href="https://docs.angularjs.org/api/ng/filter/date">angular date filter format</a> (default: <code>'HH-mm-ss'</code>). Pass as string enclosed in single quote or bound to a scope variable</li>
                     <li><code>gmt-offset</code> : shows time for the given <a href="http://en.wikipedia.org/wiki/List_of_UTC_time_offsets">GMT offset</a> in clock, (default: <code>false</code>, shows local time) example: India -> 5.30, Singapore -> 8 , venezula -> -4.30, Nepal -> 5.45</li>
                     <li><code>show-digital</code>: shows digital clock, (default: <code>true</code> if both show-analog &amp;show-digital are not set)</li>
                     <li><code>show-analog</code> : shows analog clock, (default: <code>true</code> if both show-analog &amp;show-digital are not set)</li>
                     <li><code>show-gmt-info</code> : shows GMT offset value, (default: <code>false</code>) shows only if gmt-offset attribute is set</li>
                     <li><code>theme</code> : analog clockface theme, (default: <code>light</code>)</li>
                 </ol>
-                <p>All clocks are responsive and reactive and will update automatically when data changes.</p>
+                <p>All clocks are responsive and reactive and will update automatically when data changes. <code>start-time</code>, <code>digital-format</code>,
+                and <code>gmt-offset</code> are bound attributes and hence need to be set in the scope or using <code>gmt-offset="'5.3'"</code> format with extra single quotes.</p>
+                <p><code>show-digital</code>, <code>show-analog</code> and <code>theme</code> can be used as bound attributes or as normal attributes</p>
             </section>
             <section id="directives">
                 <div class="page-header">
@@ -149,7 +157,7 @@
                             <div class="panel-heading">Clock with Start Time</div>
                             <div class="panel-body text-center">
                                 <div class="">
-                                    <ds-widget-clock start-time="{{startTimeValue}}"></ds-widget-clock>
+                                    <ds-widget-clock start-time="startTimeValue"></ds-widget-clock>
                                 </div>
 
                             </div>
@@ -159,7 +167,7 @@
                         <tabset>
                             <tab heading="Markup">
                                 <pre><code ng-non-bindable
-                                data-language="xml">&lt;ds-widget-clock start-time="{{startTimeValue}}"&gt;&lt;/ds-widget-clock&gt;</code></pre>
+                                data-language="xml">&lt;ds-widget-clock start-time="startTimeValue"&gt;&lt;/ds-widget-clock&gt;</code></pre>
                             </tab>
                             <tab heading="Javascript">
                                 <pre><code data-language="javascript">angular.module("app", ["ds.clock"]).controller("AppCtrl", function ($scope) {
@@ -258,10 +266,14 @@
                     <div class="col-lg-8 col-md-6 col-sm-12 code">
                         <tabset>
                             <tab heading="Markup">
-                                <pre><code data-language="xml">&lt;ds-widget-clock theme="dark" digital-format="'hh:mm:ss a'"&gt;&lt;/ds-widget-clock&gt;</code></pre>
+                                <pre><code data-language="xml">&lt;ds-widget-clock theme="dark" digital-format="'hh:mm:ss a'"&gt;&lt;/ds-widget-clock&gt;</code></pre> 
+                                or
+                                <pre><code data-language="xml">&lt;ds-widget-clock theme="theme" digital-format="'hh:mm:ss a'"&gt;&lt;/ds-widget-clock&gt;</code></pre>
                             </tab>
                             <tab heading="Javascript">
                                 <pre><code data-language="javascript">angular.module("app", ["ds.clock"]).controller("AppCtrl", function ($scope) {
+
+        $scope.theme = 'dark';
 
 });
               </code></pre>
@@ -283,7 +295,7 @@
                                     <hr>
                                     <ds-widget-clock show-digital digital-format="'hh:mm:ss a'" gmt-offset="5.3" show-gmt-info></ds-widget-clock>
                                     <hr>
-                                    <ds-widget-clock show-digital digital-format="'dd-MMM-yyyy hh:mm:ss a'"></ds-widget-clock>
+                                    <ds-widget-clock show-digital digital-format="format"></ds-widget-clock>
                                     <hr>
                                     <ds-widget-clock show-digital digital-format="'EEEE MMMM d,yyyy hh:mm:ss a Z'"></ds-widget-clock>
                                 </div>
@@ -303,14 +315,14 @@
 &lt;hr&gt;
 &lt;ds-widget-clock show-digital digital-format="'hh:mm:ss a'"> gmt-offset="5.3" show-gmt-info&gt;&lt;/ds-widget-clock&gt;
 &lt;hr&gt;
-&lt;ds-widget-clock show-digital digital-format="'dd-MMM-yyyy hh:mm:ss a'">&gt;&lt;/ds-widget-clock&gt;
+&lt;ds-widget-clock show-digital digital-format="format">&gt;&lt;/ds-widget-clock&gt;
 &lt;hr&gt;
 &lt;ds-widget-clock show-digital digital-format="'EEEE MMMM d,yyyy hh:mm:ss a Z'">&gt;&lt;/ds-widget-clock&gt;
 </code></pre>
                             </tab>
                             <tab heading="Javascript">
                                 <pre><code data-language="javascript">angular.module("app", ["ds.clock"]).controller("AppCtrl", function ($scope) {
-
+        $scope.format = 'dd-MMM-yyyy hh:mm:ss a';
 });
               </code></pre>
                             </tab>
