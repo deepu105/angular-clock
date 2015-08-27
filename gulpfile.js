@@ -98,7 +98,7 @@
   });
 
   gulp.task('git-commit', function() {
-    var v = version();
+    var v = 'update to version ' + version();
     gulp.src(['./dist/*', './examples/*', './test/*', './package.json', './bower.json', './angular-clock.js', './angular-clock.less'])
       .pipe(git.add())
       .pipe(git.commit(v));

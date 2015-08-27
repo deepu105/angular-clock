@@ -2,7 +2,7 @@
 
 Responsive, beautiful clocks for [AngularJS](http://angularjs.org) built using [SVG](https://developer.mozilla.org/en/docs/Web/SVG) 
 
-[Demo](http://deepu105.github.io/angular-clock/)
+[Demo & Documentation](http://deepu105.github.io/angular-clock/)
 
 # Getting started
 
