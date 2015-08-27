@@ -1,7 +1,10 @@
 (function() {
   'use strict';
 
-  /* <ds-widget-clock data-gmt-offset="0"></ds-widget-clock> */
+  /**
+   * Usage pattern
+   * <ds-widget-clock data-gmt-offset="0"></ds-widget-clock> 
+   */
   var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
@@ -17,23 +20,24 @@
       restrict: 'EA',
       scope: {
         gmtOffset: '=gmtOffset',
-        digitalFormat: '=digitalFormat'
+        digitalFormat: '=digitalFormat',
+        showDigital: '=showDigital',
+        showAnalog: '=showAnalog',
+        startTime: '=startTime',
+        theme: '=theme'
       },
-      template: '<div class="widget-clock" ng-class="theme" ng-if="date"><div class="digital" ng-if="digital"><span class="time"><span class="hours">{{digital}}</span></span></div><div class="analog" ng-if="analog"><div class="square"><svg viewBox="0 0 100 100"><g transform="translate(50,50)"><circle class="clock-face" r="48" /><line ng-repeat="minor in minors track by $index" class="minor" y1="42" y2="45" ng-attr-transform="rotate({{360 * $index / minors.length}})" /><line ng-repeat="major in majors track by $index" class="major" y1="35" y2="46" ng-attr-transform="rotate({{360 * $index / majors.length}})" /><line class="hour" y1="2" y2="-20" ng-attr-transform="rotate({{30 * date.hrs + date.mins / 2}})" /><line class="minute" y1="4" y2="-30" ng-attr-transform="rotate({{6 * date.mins + date.secs / 10}})" /><g ng-attr-transform="rotate({{6 * date.secs}})"><line class="second" y1="10" y2="-38" /><line class="second-counterweight" y1="10" y2="2" /></g></g></svg></div></div><div ng-if="gmtInfo" class="gmt-info">{{gmtInfo}}</div></div>',
+      template: '<div class="widget-clock" ng-class="themeClass" ng-if="date"><div class="digital" ng-if="digital"><span class="time"><span class="hours">{{digital}}</span></span></div><div class="analog" ng-if="analog"><div class="square"><svg viewBox="0 0 100 100"><g transform="translate(50,50)"><circle class="clock-face" r="48" /><line ng-repeat="minor in minors track by $index" class="minor" y1="42" y2="45" ng-attr-transform="rotate({{360 * $index / minors.length}})" /><line ng-repeat="major in majors track by $index" class="major" y1="35" y2="46" ng-attr-transform="rotate({{360 * $index / majors.length}})" /><line class="hour" y1="2" y2="-20" ng-attr-transform="rotate({{30 * date.hrs + date.mins / 2}})" /><line class="minute" y1="4" y2="-30" ng-attr-transform="rotate({{6 * date.mins + date.secs / 10}})" /><g ng-attr-transform="rotate({{6 * date.secs}})"><line class="second" y1="10" y2="-38" /><line class="second-counterweight" y1="10" y2="2" /></g></g></svg></div></div><div ng-if="gmtInfo" class="gmt-info">{{gmtInfo}}</div></div>',
       link: function(scope, element, attrs) {
         var format, // date format
           stopTime; // so that we can cancel the time updates
-        var o = {}; //angular.copy(defaults)
+        var o = {};
         var gmtOffset = scope.gmtOffset;
-        var digitalFormat = scope.digitalFormat !== undefined ? scope.digitalFormat : 'HH:mm:ss';
-        //o.gmtOffset = (gmtOffset !== undefined && gmtOffset !== null) ? parseFloat(gmtOffset) : false;
-        //o.showSecs = attrs.hideSecs !== undefined ? false : true;
-        //o.showAmPm = attrs.showAmPm !== undefined ? true : false;
-        o.showDigital = attrs.showDigital !== undefined ? true : false;
-        o.showAnalog = attrs.showAnalog !== undefined ? true : false;
+        var digitalFormat = scope.digitalFormat ? scope.digitalFormat : 'HH:mm:ss';
+        o.showDigital = scope.showDigital != null ? scope.showDigital : attrs.showDigital !== undefined ? true : false;
+        o.showAnalog = scope.showAnalog != null ? scope.showAnalog : attrs.showAnalog !== undefined ? true : false;
         o.showGmtInfo = attrs.showGmtInfo !== undefined ? true : false;
-        o.startTime = parseInt(attrs.startTime, 10); // ms
-        scope.theme = attrs.theme !== undefined ? attrs.theme : 'light';
+        o.startTime = parseInt(scope.startTime, 10); // ms
+        scope.themeClass = scope.theme ? scope.theme : attrs.theme ? attrs.theme : 'light';
         if (!o.showDigital && !o.showAnalog) {
           o.showAnalog = true;
           o.showDigital = true;
@@ -60,17 +64,38 @@
 
         stopTime = $interval(tick, 1000);
         // watch the expression, and update the UI on change.
-        scope.$watch('gmtOffset', function(value) {
+        scope.$watch('gmtOffset', function(value, old) {
+          
           gmtOffset = value;
-          o.gmtOffset = (gmtOffset !== undefined && gmtOffset !== null) ? getGMTbase100(gmtOffset) : false;
+          o.gmtOffset = (gmtOffset != null) ? getGMTbase100(gmtOffset) : false;
           if (o.showGmtInfo && o.gmtOffset !== false) {
             scope.gmtInfo = getGMTText(o.gmtOffset);
           }
+          
           tick();
         });
-        /*scope.$watch('digitalFormat', function(value) {
-          digitalFormat = value;
-        });*/
+        scope.$watch('digitalFormat', function(value, old) {
+          if(value != old){
+            digitalFormat = value;
+          }
+        });
+        scope.$watch('showDigital', function(value, old) {
+          if(value != old){
+            o.showDigital = value;
+            scope.digital = o.showDigital ? 'Loading..' : false;;
+          }
+        });
+        scope.$watch('showAnalog', function(value, old) {
+          if(value != old){
+            o.showAnalog = value;
+            scope.analog = value;
+          }
+        });
+        scope.$watch('theme', function(value, old) {
+          if(value != old){
+            scope.themeClass = value ? value : attrs.theme ? attrs.theme : 'light';
+          }
+        });
         // listen on DOM destroy (removal) event, and cancel the next UI update
         // to prevent updating time after the DOM element was removed.
         element.on('$destroy', function() {
@@ -123,10 +148,10 @@
   function getDate(o) {
     var now = (!isNaN(o.startTime)) ? new Date(o.startTime) : new Date();
     if (o.gmtOffset !== null && o.gmtOffset !== false) {
-      // Use GMT + gmtOffset
-      // convert to msec
-      // add local time zone offset
-      // get UTC time in msec
+      /*Use GMT + gmtOffset
+      convert to msec
+      add local time zone offset
+      get UTC time in msec*/
       var utc = now.getTime() + (now.getTimezoneOffset() * 60000);
       // create new Date object for different city
       // using supplied offset
@@ -150,11 +175,6 @@
 
   function timeText(d, format, timezone, $filter) {
     return $filter('date')(d.date, format, timezone);
-    /*return '' +
-      (o.showAmPm ? ((d.hrs % 12) === 0 ? 12 : (d.hrs % 12)) : d.hrs) + ':' +
-      lpad(d.mins) +
-      (o.showSecs ? ':' + lpad(d.secs) : '') +
-      (o.showAmPm ? (d.hrs < 12 ? ' AM' : ' PM') : '');*/
   }
 
 })();
