@@ -152,7 +152,7 @@
       convert to msec
       add local time zone offset
       get UTC time in msec*/
-      var utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+      var utc = now.getTime() + (now.getTimezoneOffset() * 3600000);
       // create new Date object for different city
       // using supplied offset
       var offsetNow = new Date(utc + (3600000 * o.gmtOffset));
