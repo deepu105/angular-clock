@@ -19,6 +19,7 @@
   var rename = require('gulp-rename');
   var fs = require('fs');
   var sequence = require('gulp-sequence');
+  var flatten = require('gulp-flatten');
 
   gulp.task('less', function() {
     return gulp.src('./*.less')
@@ -70,16 +71,25 @@
       .pipe(gulp.dest('dist/'));
   });
 
-  gulp.task('demojs', ['lint', 'bower'], function() {
-    return gulp.src('./angular-clock.js')
-      .pipe(rename('angular-clock.min.js'))
-      .pipe(sourcemaps.init())
-      .pipe(uglify())
-      .pipe(sourcemaps.write('./'))
-      .pipe(gulp.dest('./dist'));
+  gulp.task('copy-js', function() {
+    gulp.src(['bower_components/**/*.min.js','!bower_components/**/jquery-*', '!bower_components/**/ui-bootstrap.min.js','bower_components/**/generic.js','bower_components/**/javascript.js','bower_components/**/html.js'])
+      .pipe(flatten())
+      .pipe(gulp.dest('demo/lib/js'));
   });
 
-  gulp.task('demo', function(cb) {
+  gulp.task('copy-css', function() {
+    gulp.src(['bower_components/**/*.min.css','bower_components/**/github.css'])
+      .pipe(flatten())
+      .pipe(gulp.dest('demo/lib/css'));
+  });
+
+  gulp.task('copy-font', function() {
+    gulp.src(['bower_components/**/*.{eot,svg,ttf,woff}'])
+      .pipe(flatten())
+      .pipe(gulp.dest('demo/lib/fonts'));
+  });
+
+  gulp.task('demo', ['copy-js', 'copy-css', 'copy-font'], function(cb) {
     fs.readFile('./examples/index.template.html', 'utf8', function(err, file) {
       if (err) return cb(err);
       file = file.replace('<!-- version -->', version());
@@ -94,17 +104,47 @@
       .pipe(git.commit(v));
   });
 
-  gulp.task('git-push', function(cb) {
-    var v = version();
-    git.push('origin', 'master', function(err) {
-      if (err) return cb(err);
-      git.tag(v, v, function(err) {
-        if (err) return cb(err);
-        git.push('origin', 'master', {
-          args: '--tags'
-        }, cb);
+  gulp.task('git-push', function (cb) {
+      var v = 'v' + version();
+      git.push('origin', 'master', function (err) {
+          if (err) return cb(err);
+          git.tag(v, v, function (err) {
+              if (err) return cb(err);
+              git.push('origin', 'master', {
+                  args: '--tags'
+              }, function(err){
+                  if (err) return cb(err);
+                  git.checkout('gh-pages', function (err) {
+                      if (err) return cb(err);
+                      git.reset('master', {
+                          args: '--hard'
+                      }, function (err) {
+                          if (err) return cb(err);
+                          git.push('origin', 'gh-pages', function (err) {
+                              if (err) return cb(err);
+                              git.checkout('master', cb);
+                          });
+                      });
+                  });
+              });
+          });
       });
-    });
+  });
+
+  gulp.task('git-demo', function (cb) {
+      var v = 'v' + version();
+      git.checkout('gh-pages', function (err) {
+          if (err) return cb(err);
+          git.reset('master', {
+              args: '--hard'
+          }, function (err) {
+              if (err) return cb(err);
+              git.push('origin', 'gh-pages', function (err) {
+                  if (err) return cb(err);
+                  git.checkout('master', cb);
+              });
+          });
+      });
   });
 
   gulp.task('npm', shell.task([

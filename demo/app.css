@@ -1,0 +1,113 @@
+body {
+  padding-top: 50px;
+}
+.nav,
+.pagination,
+.carousel,
+.panel-title a {
+  cursor: pointer;
+}
+#hero-bar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  padding-right: 0;
+}
+.container-fluid {
+  padding-left: 0;
+  padding-right: 0;
+}
+.aspect-ratio {
+  width: 100%;
+  position: relative;
+}
+.header {
+  width: 100%;
+  font-size: larger;
+  z-index: 500;
+}
+.panel-heading {
+  font-weight: bold;
+}
+.code .nav-tabs>li.active>a,
+.code .nav-tabs>li.active>a:hover,
+.code .nav-tabs>li.active>a:focus {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  border-bottom-color: transparent;
+}
+.code pre,
+.code code {
+  background-color: #f8f8f8;
+  border-top: none;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+.settings > a,
+.settings {
+  background-color: white ! important;
+}
+.nav-tabs > li > a {
+  border-bottom: 1px solid #ccc;
+  margin-right: 0;
+}
+.settings > a.active {
+  border: 1px solid transparent;
+}
+div.settings {
+  border: 1px solid #ccc;
+  border-top: 0;
+  padding: 9.5px;
+  margin: 0 0 10px
+}
+div.settings > code {
+  border-top: 1px solid #eaeaea;
+}
+.footer {
+  text-align: center;
+  padding: 30px 0;
+  margin-top: 70px;
+  border-top: 1px solid #e5e5e5;
+  background-color: #f5f5f5;
+}
+/* clock custom themes*/
+
+.widget-clock.blue-light .clock-face {
+  stroke: #153b6f;
+  fill: #0e2434;
+}
+.widget-clock.blue-light .minor {
+  stroke: #0089ff;
+  stroke-width: 0.5;
+}
+.widget-clock.blue-light .major {
+  stroke: rgba(119, 176, 242, 0.97);
+  stroke-width: 0.5;
+}
+.widget-clock.blue-light .hour {
+  stroke: rgba(119, 176, 242, 0.97);
+  stroke-width: 1;
+}
+.widget-clock.blue-light .minute {
+  stroke: #0089ff;
+  stroke-width: 0.75;
+}
+.widget-clock.blue-light .second,
+.widget-clock.blue-light .second-counterweight {
+  stroke: rgb(234, 31, 54);
+  stroke-width: 0.5;
+}
+.widget-clock.blue-light .second-counterweight {
+  stroke-width: 1.5;
+}
+/*digital clock custom theme*/
+
+.widget-clock.blue-light .digital {
+  text-align: center;
+}
+.widget-clock.blue-light .time {
+  font-family: 'Rationale', sans-serif;
+  font-size: 3.0em;
+  color: #1da4eb;
+}
