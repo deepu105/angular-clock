@@ -1,6 +1,6 @@
-# Angular Clock Widget 
+# Angular Clock Widget
 
-Responsive, beautiful clocks for [AngularJS](http://angularjs.org) built using [SVG](https://developer.mozilla.org/en/docs/Web/SVG) 
+Responsive, beautiful clocks for [AngularJS](http://angularjs.org) built using [SVG](https://developer.mozilla.org/en/docs/Web/SVG)
 
 [Demo & Documentation](http://deepu105.github.io/angular-clock/)
 
@@ -8,16 +8,17 @@ Responsive, beautiful clocks for [AngularJS](http://angularjs.org) built using [
 
 ### Dependencies
 
-This repository contains **native AngularJS directives** to render a clock face. The **only required dependencies** are: 
+This repository contains **native AngularJS directives** to render a clock face. The **only required dependencies** are:
 
 *   [AngularJS](http://angularjs.org) (tested with 1.3.14 although it probably works with older versions)
 
 ### Installation
 
+```
 bower install angular-ui-clock --save
-
+```
 Alternatively files can be downloaded [downloaded from Github](https://github.com/deepu105/angular-clock).
-and copy the files from `dist/`. Then add the sources to your code (adjust paths as needed) after 
+and copy the files from `dist/`. Then add the sources to your code (adjust paths as needed) after
 adding the dependencies for Angular first:
 
 ```html
@@ -79,13 +80,13 @@ angular clock widget is reactive and fully responsive
 
 
 # Issues
- 
+
 Please check if issue exists and otherwise open issue in [github](https://github.com/deepu105/angular-clock/issues?state=open)
 
-**Please add a link to a plunker, jsbin, or equivalent.** 
+**Please add a link to a plunker, jsbin, or equivalent.**
 
 # Contributing
- 
+
 Pull requests welcome!
 
 1. Fork the repo

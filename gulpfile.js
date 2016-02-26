@@ -35,30 +35,11 @@
       .pipe(jshint.reporter(stylish));
   });
 
-  /* gulp.task('style', function() {
-    return gulp.src('**/
-  /*.js')
-      .pipe(jscs());
-  });*/
-
-  /*  gulp.task('unit', shell.task([
-    ' node_modules/mocha-phantomjs/bin/mocha-phantomjs -R spec test/index.html '
-  ]));*/
   gulp.task('unit', function() {
     return gulp
       .src('test/index.html')
       .pipe(mochaPhantomJS());
   });
-  /*  gulp.task('integration', function() {
-    return gulp.src('test/test.integration.js', {
-      read: false
-    })
-      .pipe(mocha({
-        reporter: 'list',
-        timeout: 10000,
-        require: 'test/support/setup.js'
-      }));
-  });*/
 
   gulp.task('bump-patch', bump('patch'));
   gulp.task('bump-minor', bump('minor'));
@@ -69,7 +50,7 @@
       .pipe(gulp.dest('./dist'));
   });
 
-  gulp.task('js', ['lint' /*, 'style'*/ , 'bower'], function() {
+  gulp.task('js', ['lint', 'bower'], function() {
     return gulp.src('./angular-clock.js')
       .pipe(rename('angular-clock.min.js'))
       .pipe(sourcemaps.init())
@@ -89,7 +70,16 @@
       .pipe(gulp.dest('dist/'));
   });
 
-  gulp.task('update', function(cb) {
+  gulp.task('demojs', ['lint', 'bower'], function() {
+    return gulp.src('./angular-clock.js')
+      .pipe(rename('angular-clock.min.js'))
+      .pipe(sourcemaps.init())
+      .pipe(uglify())
+      .pipe(sourcemaps.write('./'))
+      .pipe(gulp.dest('./dist'));
+  });
+
+  gulp.task('demo', function(cb) {
     fs.readFile('./examples/index.template.html', 'utf8', function(err, file) {
       if (err) return cb(err);
       file = file.replace('<!-- version -->', version());
