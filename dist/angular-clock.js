@@ -24,7 +24,8 @@
         showDigital: '=showDigital',
         showAnalog: '=showAnalog',
         startTime: '=startTime',
-        theme: '=theme'
+        theme: '=theme',
+        majorsTotal: '=majorsTotal'
       },
       template: '<div class="widget-clock" ng-class="themeClass" ng-if="date"><div class="digital" ng-if="digital"><span class="time"><span class="hours">{{digital}}</span></span></div><div class="analog" ng-if="analog"><div class="square"><svg viewBox="0 0 100 100"><g transform="translate(50,50)"><circle class="clock-face" r="48" /><line ng-repeat="minor in minors track by $index" class="minor" y1="42" y2="45" ng-attr-transform="rotate({{360 * $index / minors.length}})" /><line ng-repeat="major in majors track by $index" class="major" y1="35" y2="46" ng-attr-transform="rotate({{360 * $index / majors.length}})" /><line class="hour" y1="2" y2="-20" ng-attr-transform="rotate({{30 * date.hrs + date.mins / 2}})" /><line class="minute" y1="4" y2="-30" ng-attr-transform="rotate({{6 * date.mins + date.secs / 10}})" /><g ng-attr-transform="rotate({{6 * date.secs}})"><line class="second" y1="10" y2="-38" /><line class="second-counterweight" y1="10" y2="2" /></g></g></svg></div></div><div ng-if="gmtInfo" class="gmt-info">{{gmtInfo}}</div></div>',
       link: function(scope, element, attrs) {
@@ -48,7 +49,7 @@
 
         scope.digital = o.showDigital ? 'Loading..' : false;
         scope.analog = o.showAnalog;
-        scope.majors = new Array(12);
+        scope.majors = attrs.majorsTotal ? new Array(parseInt(attrs.majorsTotal)) : new Array(12);
         scope.minors = new Array(60);
         var date = null;
         var tick = function() {
