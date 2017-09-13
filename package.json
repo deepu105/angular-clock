@@ -47,7 +47,7 @@
     "sinon": "^1.12.2",
     "sinon-chai": "^2.7.0",
     "testatic": "^0.1.0",
-    "tmp-sync": "jtblin/node-tmp-sync",
+    "tmp-sync": "kaelzhang/node-tmp-sync",
     "webshot": "^0.15.3"
   }
 }

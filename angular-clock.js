@@ -175,7 +175,11 @@
   }
 
   function timeText(d, format, timezone, $filter) {
-    return $filter('date')(d.date, format, timezone);
+    if (timezone !== undefined) {
+      return $filter('date')(d.date, format, timezone.toString());
+    } else {
+      return $filter('date')(d.date, format);
+    }
   }
 
 })();
