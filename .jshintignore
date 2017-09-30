@@ -3,4 +3,4 @@ node_modules/
 dist/
 tmp/
 examples/smoothscroll.min.js
-
+demo/lib/
