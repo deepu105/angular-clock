@@ -51,7 +51,7 @@
       .pipe(gulp.dest('./dist'));
   });
 
-  gulp.task('js', ['lint', 'bower'], function() {
+  gulp.task('js', ['bower'], function() {
     return gulp.src('./angular-clock.js')
       .pipe(rename('angular-clock.min.js'))
       .pipe(sourcemaps.init())
@@ -168,8 +168,8 @@
   gulp.task('default', sequence('check', ['less', 'js'], 'build'));
   gulp.task('test', sequence('unit' /*, 'integration'*/ ));
   gulp.task('check', sequence(['lint' /*, 'style'*/ ], 'test'));
-  gulp.task('deploy-patch', sequence('default', 'bump-patch', 'update', 'git-commit', 'git-push', 'npm'));
-  gulp.task('deploy-minor', sequence('default', 'bump-minor', 'update', 'git-commit', 'git-push', 'npm'));
-  gulp.task('deploy-major', sequence('default', 'bump-major', 'update', 'git-commit', 'git-push', 'npm'));
+  gulp.task('deploy-patch', sequence('default', 'bump-patch', 'demo', 'git-commit', 'git-push', 'npm'));
+  gulp.task('deploy-minor', sequence('default', 'bump-minor', 'demo', 'git-commit', 'git-push', 'npm'));
+  gulp.task('deploy-major', sequence('default', 'bump-major', 'demo', 'git-commit', 'git-push', 'npm'));
 
 })();
