@@ -89,13 +89,7 @@
       .pipe(gulp.dest('demo/lib/fonts'));
   });
 
-  gulp.task('demo', ['copy-js', 'copy-css', 'copy-font'], function(cb) {
-    fs.readFile('./examples/index.template.html', 'utf8', function(err, file) {
-      if (err) return cb(err);
-      file = file.replace('<!-- version -->', version());
-      fs.writeFile('./examples/index.html', file, cb);
-    });
-  });
+  gulp.task('demo', ['copy-js', 'copy-css', 'copy-font']);
 
   gulp.task('git-commit', function() {
     var v = 'update to version ' + version();
