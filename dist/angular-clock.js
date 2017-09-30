@@ -59,7 +59,7 @@
           date = getDate(o);
           scope.date = date;
           if (o.showDigital) {
-            scope.digital = timeText(date, digitalFormat, gmtOffset, $filter);
+            scope.digital = timeText(date, digitalFormat, $filter);
           }
         };
 
@@ -174,8 +174,8 @@
     }
   }
 
-  function timeText(d, format, timezone, $filter) {
-    return $filter('date')(d.date, format, timezone);
+  function timeText(d, format, $filter) {
+    return $filter('date')(d.date, format);
   }
 
 })();
