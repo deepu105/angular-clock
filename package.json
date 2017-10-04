@@ -1,6 +1,6 @@
 {
   "name": "angular-clock",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "An angular.js clock widget",
   "main": "angular-clock.js",
   "directories": {
