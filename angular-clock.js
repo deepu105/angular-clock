@@ -3,7 +3,7 @@
 
   /**
    * Usage pattern
-   * <ds-widget-clock data-gmt-offset="0"></ds-widget-clock> 
+   * <ds-widget-clock data-gmt-offset="0"></ds-widget-clock>
    */
   var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -66,13 +66,13 @@
         stopTime = $interval(tick, 1000);
         // watch the expression, and update the UI on change.
         scope.$watch('gmtOffset', function(value, old) {
-          
+
           gmtOffset = value;
           o.gmtOffset = (gmtOffset != null) ? getGMTbase100(gmtOffset) : false;
           if (o.showGmtInfo && o.gmtOffset !== false) {
             scope.gmtInfo = getGMTText(o.gmtOffset);
           }
-          
+
           tick();
         });
         scope.$watch('digitalFormat', function(value, old) {
@@ -80,7 +80,7 @@
             digitalFormat = value;
           }
         });
-		scope.$watch('startTime', function(value, old) {
+        scope.$watch('startTime', function(value, old) {
           if(value != old){
             o.startTime = parseInt(value, 10);
           }
