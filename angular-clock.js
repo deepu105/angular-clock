@@ -80,6 +80,11 @@
             digitalFormat = value;
           }
         });
+		scope.$watch('startTime', function(value, old) {
+          if(value != old){
+            o.startTime = parseInt(value, 10);
+          }
+        });
         scope.$watch('showDigital', function(value, old) {
           if(value != old){
             o.showDigital = value;
